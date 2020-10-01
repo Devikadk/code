@@ -19,14 +19,10 @@
 pthread_mutex_t lock;
 
 void * poll_database_for_new_requests(void * vargp) {
- // printf("in poll database function");
- // printf("Sleeping for 7 seconds.\n");
   sleep(9);
-  //printf("Sleep over\n");
-  // Step 1: Open a DB connection
-  int i = 0;
-  while (i < 1) {
-
+ // Step 1: Open a DB connection
+  //thread set up a mutex lock before getting an esb request. If no request is there it ulock and sleep. If request found it sets its status to processing and then unlocks
+  while (true) {
     pthread_mutex_lock(&lock);
     task_list * req = fetch_data1();
     if (req == NULL) {
@@ -39,6 +35,7 @@ void * poll_database_for_new_requests(void * vargp) {
       update_status("processing", req -> id);
       pthread_mutex_unlock(&lock);
       printf("processing  %d\n", req -> id);
+     //gets route id and use it to get transport key , value and transform key , value
       int route_id = select_active_routes(req -> MessageType, req -> Sender, req -> Destination);
       char * data_location = req -> data_location;
       //printf("%s",b->payload);
@@ -62,10 +59,9 @@ void * poll_database_for_new_requests(void * vargp) {
       char * fields[1]; //url
 
       printf("Applying transformation and transporting steps. \n");
-
+     // applies transformation
       apply_transform(transform_key, transport_key, transport_value, data_location, fields);
-
-      // char* transformed_string="https://ifsc.razorpay.com/HDFC0CAGSBK";
+     //if transport key is http, then send http request to the url and receive response  
       if (!strcmp(transport_key, "HTTP")) {
         printf("%d\n", strcmp(fields[0], "https://ifsc.razorpay.com/HDFC0CAGSBK"));
         char url2[100];
@@ -83,7 +79,8 @@ void * poll_database_for_new_requests(void * vargp) {
           printf("DONE\n");
         }
 
-      } else if (!strcmp(transport_key, "SMTP")) {
+      }// if transport key is smtp then send mail to transport value i.e. mail id 
+     else if (!strcmp(transport_key, "SMTP")) {
 
         int x = sendemail("devikakrishnan249@gmail.com", "/home/devika/Desktop/esb_app/data-Payload.json");
         if (x == 1) {
