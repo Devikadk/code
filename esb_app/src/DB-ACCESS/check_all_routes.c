@@ -8,15 +8,15 @@
 #define SELECT_ID "select route_id from routes where message_type = ? and sender = ? and destination = ?  and is_active=1"  
 #define STRING_SIZE 200
 
-
+/* Returns route_id if an active route exists for a given sender,destination and message_tye */
 
 int select_active_routes(char *message_type,char *sender,char *destination)
 {   
   MYSQL *con;
   char *server = "localhost";
   char *user = "root";
-  char *password = "Devika@1998"; /* set me first */
-  char *database = "DB";
+  char *password = "riya"; /* set me first */
+  char *database = "esb_db";
 	
   con = mysql_init(NULL);
 	
