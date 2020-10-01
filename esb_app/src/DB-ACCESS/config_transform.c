@@ -1,3 +1,10 @@
+/**
+* @brief :Function fetches transform config_key and config_value 
+* sql query:select config_key,config_value from transform_config where route_id=?
+*
+* returns struct containing transform_config key and value 
+   if route_id exists else NULL
+*/
 #include "db_connection.h"
 #include<stdio.h>
 #include<stdlib.h>
@@ -14,8 +21,8 @@ tf_data* get_tf_data(int route_id)
    MYSQL *con;
   char *server = "localhost";
   char *user = "root";
-  char *password = "Devika@1998"; /* set me first */
-  char *database = "DB";
+  char *password = "riya"; /* set me first */
+  char *database = "esb_db";
 	
   con = mysql_init(NULL);
 	
