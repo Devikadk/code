@@ -1,3 +1,10 @@
+/**
+* @brief :Function fetches transport config_key and config_value 
+* sql query:select config_key,config_value from transport_config where route_id=?
+*
+* returns struct containing transport_config key and value 
+   if route_id exists else NULL if it does not exist
+*/
 #include "db_connection.h"
 #include<stdio.h>
 #include<stdlib.h>
@@ -15,8 +22,8 @@ tp_data* get_tp_data(int route_id)
    MYSQL *con;
   char *server = "localhost";
   char *user = "root";
-  char *password = "Devika@1998"; /* set me first */
-  char *database = "DB";
+  char *password = "riya"; /* set me first */
+  char *database = "esb_db";
 	
   con = mysql_init(NULL);
 	
