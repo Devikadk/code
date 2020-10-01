@@ -6,6 +6,7 @@
 #include "../DB-ACCESS/db_connection.h"
 #include "xml_header.h"
 //Converts .xml file to .json file 
+//xml2json for payload of bmd
 char * xmltojson(bmd *b)
 {
      char doc[1000];
@@ -32,7 +33,7 @@ char * xmltojson(bmd *b)
 //check whether payload size is acceptable or not
 int check_payload(bmd *b)
 {
-    
+    //we convert payload to json file and then check size
     char *load = xmltojson(b);
     FILE* fp = fopen(load, "r"); 
   
