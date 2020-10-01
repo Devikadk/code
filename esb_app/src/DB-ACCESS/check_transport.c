@@ -8,15 +8,21 @@
 #define CHECK_ID "select id from transport_config where route_id=?"  
 #define STRING_SIZE 200
 
-
+/**
+* @brief check route_id in transport_config table 
+*
+* @parameters route_id in routes table 
+*  return 1 for success
+*
+*/
 
 int check_transport(int route_id)
 {
    MYSQL *con;
   char *server = "localhost";
   char *user = "root";
-  char *password = "Devika@1998"; /* set me first */
-  char *database = "DB";
+  char *password = "riya"; /* set me first */
+  char *database = "esb_db";
 	
   con = mysql_init(NULL);
 	
