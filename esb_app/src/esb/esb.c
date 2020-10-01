@@ -13,7 +13,7 @@ int queue_the_request(bmd *b,char *file)
     int success = 1; // 1 => OK, -1 => Error cases
     int failure=-1;
     /** 
-     * TODO: Insert the envelop data into esb_requests table,
+    * Insert the envelop data into esb_requests table,
      * and implement other logic for enqueueing the request
      * as specified in Theory of Operation.
      */
@@ -32,7 +32,7 @@ int queue_the_request(bmd *b,char *file)
 int process_esb_request(char* file) {
     int status = 1; // 1 => OK, -ve => Errors
   //  printf("Handling the BMD %s\n", bmd_file_path);
-    /** TODO: 
+    /**  
      * Perform the steps outlined in the Theory of Operation section of
      * the ESB specs document. Each major step should be implemented in
      * a separate module. Suitable unit tests should be created for all
