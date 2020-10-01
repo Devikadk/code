@@ -7,15 +7,21 @@
 #define CHECK_ID "select id from transform_config where route_id=?"  
 #define STRING_SIZE 200
 
-
+/**
+* @brief check route_id in transform_config table 
+*
+* @parameters route_id in routes table 
+*  return 1 for success
+*
+*/
 
 int check_transform(int route_id)
 {
   MYSQL *con;
   char *server = "localhost";
   char *user = "root";
-  char *password = "Devika@1998"; /* set me first */
-  char *database = "DB";
+  char *password = "riya"; /* set me first */
+  char *database = "esb_db";
 	
   con = mysql_init(NULL);
 	
@@ -158,4 +164,4 @@ int main()
    //char *message_type = "sample";
    printf("%d",check_transform(2));
    return 0;
-}*/
+}*
