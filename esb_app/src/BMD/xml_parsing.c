@@ -4,6 +4,10 @@
 #include<string.h>
 #include <libxml/parser.h>
  
+/*
+* @brief :checking whether it is a leaf node generated in DOM
+          if yes return 1 else 0
+*/
 int is_leaf(xmlNode * node)
 {
   xmlNode * child = node->children;
@@ -15,7 +19,10 @@ int is_leaf(xmlNode * node)
   return 1;
 }
 
-
+/*
+*brief @ extracting contents from a XML document and store it in b
+* we store if node type is element and is a leaf
+*/
 void extract_attribute(xmlNode * node, bmd_envelop * b)
 {
     int len;
@@ -82,7 +89,8 @@ void extract_attribute(xmlNode * node, bmd_envelop * b)
         node = node->next;
     }
 }
-
+/* @brief :extracting bmd_envelop
+*/
 
 bmd_envelop *extract_envelop(char * filepath)
 {
@@ -108,7 +116,8 @@ bmd_envelop *extract_envelop(char * filepath)
 }
 
 
-
+/* brief:extracting Payload
+*/
 
 char * extract_payload(char * file)
 {
@@ -151,13 +160,19 @@ char * extract_payload(char * file)
   /*make document free*/
   xmlFreeDoc(doc);
 
-
+  /*
+  * Free the global variables that may have been allocated by the parser
+  */
   xmlCleanupParser();
 
   return NULL;     
 }
 
-
+/*@ brief :validating bmd xml
+* checking whether xml file consists of all appropriate elements.
+*if it contains returns 1
+* else return 0
+*/
 int is_bmd_valid(bmd* b)
 {
   /* Checking Whether MessageID is NULL */
